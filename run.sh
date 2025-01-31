@@ -149,6 +149,16 @@ function try-load-dotenv {
     done < <(grep -v '^#' "$THIS_DIR/.env" | grep -v '^$')
 }
 
+function run-mock {
+
+    python -m moto.server -p 5000 &
+    uvicorn files_api.main:APP --reload
+}
+
+function run {
+    uvicorn files_api.main:APP --reload
+}
+
 # print all functions in this file
 function help {
     echo "$0 <task> <args>"

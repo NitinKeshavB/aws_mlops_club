@@ -3,13 +3,13 @@
 ############################
 
 [project]
-name = "aws_mlops_club"
-description = "My package description"
-authors = [{ name = "<your name>", email = "some-email@gmail.com" }]
+name = "mlops_py_pkg"
+description = "This is a package for aws mlops"
+authors = [{ name = "Nitin Keshav", email = "nitin.keshav11@gmail.com" }]
 readme = "README.md"
 requires-python = ">=3.7"
 license = { text = "MIT" }
-dependencies = []
+dependencies = ["importlib-metadata; python_version<'3.8'","boto3","fastapi"]
 classifiers = ["Programming Language :: Python :: 3"]
 keywords = ["one", "two"]
 
@@ -22,7 +22,10 @@ version = { file = "version.txt" }
 
 # optional dependencies can be installed with square brackets, e.g. `pip install my-package[test,static-code-qa]`
 [project.optional-dependencies]
-test = ["pytest", "pytest-cov"]
+api = ["uvicorn","pydantic","moto[server]"]
+stubs=["boto3-stubs[s3]"]
+jupyter=["jupyterlab","rich","ipykernel"]
+test = ["pytest", "pytest-cov","moto[s3]"]
 release = ["build", "twine"]
 static-code-qa = [
     "pre-commit",
@@ -34,12 +37,13 @@ static-code-qa = [
     "Flake8-pyproject",
     "radon",
 ]
-# Installing dev depenendencies in your virtual env makes it so that during development VS Code can 
+# Installing dev depenendencies in your virtual env makes it so that during development VS Code can
 # - surface linting errors
 # - automatically apply formatting
 # - show enhanced autocompletion for stubs libraries
 # See .vscode/settings.json to see how VS Code is configured to use these tools
-dev = ["aws_mlops_club[test,release,static-code-qa]"]
+dev = ["mlops_py_pkg[test,release,static-code-qa,stubs,jupyter,api]"]
+
 
 [build-system]
 # Minimum requirements for the build system to execute.

@@ -174,3 +174,5 @@ dist
 *env
 *.env
 *cache*
+*aws/
+*awscliv2.zip
